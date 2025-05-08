@@ -54,8 +54,41 @@ class Todopage extends StatelessWidget {
                               return null;
                             },
                           ),
-                        )
+                        ),
+                        FilledButton(
+                          onPressed: () {
+                            if (_key.currentState!.validate()) {
+                              final selectedDate = context.read<TodoBloc>().state;
+                              if (selectedDate is TodoLoaded) {
+                                context.read<TodoBloc>().add(
+                                  TodoEventAdd(
+                                    title: _controller.text,
+                                    date: selectedDate.selectedDate!,
+                                  ),
+                                );
+                                _controller.clear();
+                                selectedDate.selectedDate = null;
+                              }
+                            }
+                          }, 
+                          child: Text('Tambah')
+                          )
                       ],
+                    ),
+                  ),
+                  SizedBox(height: 16.0),
+                  Expanded(
+                    child: BlocBuilder<TodoBloc, TodoState>(
+                      builder: (context, state) {
+                        if (state is TodoLoading) {
+                          return Center(child: CircularProgressIndicator());
+                        } else if (state is TodoLoaded) {
+                          if (state.todos.isEmpty) {
+                            return Center(child: Text('Todo list is empty'));
+                          }                         
+                        }
+                        return Center(child: Text('No todos'));
+                      },
                     ),
                   )
                 ],
