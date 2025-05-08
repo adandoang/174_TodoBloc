@@ -144,8 +144,9 @@ class Todopage extends StatelessWidget {
                               );                             
                             },
                           );        
-                        }
-                        return Center(child: Text('No todos'));
+                        } else {
+                          return Center(child: Text('No todos'));
+                        }                       
                       },
                     ),
                   )
