@@ -90,7 +90,14 @@ class Todopage extends StatelessWidget {
                             itemCount: state.todos.length,
                             itemBuilder: (context, index) {
                               final todo = state.todos[index];
-                              
+                              return Container(
+                                margin: EdgeInsets.only(bottom: 8.0),
+                                padding: EdgeInsets.all(16.0),
+                                decoration: BoxDecoration(
+                                  color: Colors.blue[50],
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                              );                             
                             },
                           );        
                         }
